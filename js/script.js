@@ -114,7 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const emailEl  = document.getElementById('email');
     const msgEl    = document.getElementById('message');
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    // Strictly allows only Gmail, Yahoo, Hotmail, and Outlook
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail|yahoo|hotmail|outlook)\.(com|net|org)$/i; 
 
     const showFeedback = (message, type) => {
         feedback.textContent = message;
@@ -151,7 +152,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (!valid) {
-            showFeedback('Please check the highlighted fields.', 'error');
+            // Check which field failed first to give a specific message
+            let errorMessage = 'Please check the highlighted fields.'; // Default
+            
+            if (msgEl.value.trim().length < 10) {
+                errorMessage = 'Please write a message with at least 10 characters.';
+            } else if (nameEl.value.trim().length < 2) {
+                errorMessage = 'Please enter a valid name (at least 2 characters).';
+            } else if (!emailRegex.test(emailEl.value.trim())) {
+                errorMessage = 'Please enter a valid email address (Gmail, Yahoo, Hotmail, or Outlook), (e.g., name@gmail.com).';
+            }
+
+            showFeedback(errorMessage, 'error');
             firstInvalid?.focus();
             return;
         }
