@@ -17,8 +17,8 @@
   --accent: #aa7b51; /* toasted caramel */
   --surface-alt:#aa7b51 ;
   --card-bg: #f1eee8; 
-  --text: #2b211a;
-  --text-muted: #4d453d;
+  --text: #40332b;
+  --text-muted: #5f4733;
   --accent: #aa7b51; /* toasted caramel */
   --accent-hover: #946539;
   --accent-soft: rgba(176, 125, 79, 0.12);
@@ -187,7 +187,16 @@ h3 {
   backdrop-filter: blur(14px);
   background: var(--bg);
   border-bottom: 1px solid var(--border);
+
+  transition: transform 0.4s var(--ease);
+  will-change: transform;
+
 }
+
+.site-header.nav-hidden {
+  transform: translateY(-100%);
+}
+
 .navbar {
   max-width: var(--maxw);
   margin: 0 auto;
@@ -242,6 +251,15 @@ h3 {
 .nav-links {
   display: flex;
   gap: 2.2rem;
+}
+.nav-close-row {
+  display: none;
+}
+.nav-close {
+  display: none;
+}
+.nav-backdrop {
+  display: none;
 }
 .nav-links a {
   font-size: 0.9rem;
@@ -388,22 +406,21 @@ body.dark-mode .icon-moon {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.75rem;
 }
+
 .menu-card {
   background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 1px solid rgba(0, 0, 0, 0.05); 
+  border-radius: 24px; 
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition:
-    transform 0.35s var(--ease),
-    box-shadow 0.35s var(--ease),
-    border-color 0.35s var(--ease);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); 
+  transition: all 0.4s var(--ease);
 }
 .menu-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--accent);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(170, 123, 81, 0.12);
+  border-color: rgba(170, 123, 81, 0.3);
 }
 .menu-card img {
   width: 100%;
@@ -518,6 +535,7 @@ body.dark-mode .icon-moon {
   grid-template-columns: 1fr 1.2fr;
   gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
+  align-items: stretch; 
 }
 .visit-card {
   background: var(--surface);
@@ -553,6 +571,7 @@ body.dark-mode .icon-moon {
   border-radius: var(--radius);
   box-shadow: var(--shadow-md);
   width: 100%;
+  height: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
@@ -760,6 +779,39 @@ body.dark-mode .icon-moon {
     transform: translateX(100%);
     transition: transform 0.4s var(--ease);
     z-index: 150;
+  }
+  .nav-links .nav-close-row {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+  .nav-close {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+  .nav-close:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .nav-backdrop.active {
+    display: block;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: rgba(25, 18, 13, 0.42);
+    z-index: 140;
+    cursor: default;
   }
   .nav-links.active {
     transform: translateX(0);

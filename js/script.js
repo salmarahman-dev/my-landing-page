@@ -5,18 +5,29 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ---------- FEATURE 1: MOBILE NAVIGATION ---------- */
     const hamburger = document.getElementById('hamburger');
     const navLinks  = document.getElementById('navLinks');
+    const navBackdrop = document.getElementById('navBackdrop');
+    const closeNavButton = document.getElementById('closeNav');
 
     const closeMobileNav = () => {
         navLinks.classList.remove('active');
         hamburger.classList.remove('open');
         hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Open menu');
+        navBackdrop.classList.remove('active');
+        navBackdrop.hidden = true;
     };
 
     hamburger.addEventListener('click', () => {
         const isOpen = navLinks.classList.toggle('active');
         hamburger.classList.toggle('open', isOpen);
         hamburger.setAttribute('aria-expanded', String(isOpen));
+        hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        navBackdrop.hidden = !isOpen;
+        navBackdrop.classList.toggle('active', isOpen);
     });
+
+    closeNavButton.addEventListener('click', closeMobileNav);
+    navBackdrop.addEventListener('click', closeMobileNav);
 
     // Close the drawer when a link is tapped (better mobile UX)
     navLinks.querySelectorAll('a').forEach(link => {
@@ -151,9 +162,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+    /* ---------- FEATURE 6: DYNAMIC NAVBAR ON SCROLL ---------- */
+    const header = document.querySelector('.site-header');
+    let lastScrollY = window.scrollY;
 
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
 
+        // If scrolling down AND we've scrolled past the hero section
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            header.classList.add('nav-hidden'); // Hide nav
+        } else {
+            header.classList.remove('nav-hidden'); // Show nav
+        }
 
+        lastScrollY = currentScrollY;
+    });
 
 
 

@@ -1,31 +1,38 @@
-# Crumb & Co.
+# Kabul Bakery Shop
 
-A responsive bakery website for a shop in Kabul, Afghanistan. Built with HTML, CSS, and vanilla JavaScript for Assignment #1.
+A responsive bakery website for a local shop in Karte-4, Kabul, Afghanistan. The page features fresh bread, cakes, pastries, and Afghan sweets. It is built with HTML, CSS, and vanilla JavaScript for Assignment #1.
 
-## Project files
+## Project structure
 
-- `index.html` — page content and bakery products
-- `css/style.css` — colors, layout, and responsive styles
-- `js/script.js` — mobile menu, theme switch, “See more,” order popup, and form validation
-- `images/` — add bakery and product photos here
+```text
+my-landing-page/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── script.js
+├── images/
+└── README.md
+```
 
-The croissant card uses the image already in `images/Butter Croissant.webp`. Other product cards still have photo placeholders.
+## Run the website
+
+Open `index.html` in a web browser. No installation or build step is needed.
 
 ## Features
 
-- Semantic page sections and navigation
-- Responsive layout using CSS Grid, Flexbox, and media queries
-- Mobile navigation and light/dark theme switch
-- Six products shown first; two Afghan sweets appear with “See more”
-- Afghan sweets: Bakhlawa (Bghlawa) and Ludos cookies
-- Order popup and contact form validation
+- Responsive layout for desktop, tablet, and mobile
+- Mobile navigation menu and light/dark theme switch
+- Six product cards shown at first; click **See more** to reveal two Afghan sweets
+- Add-to-order popup for each product
+- Contact form validation with a confirmation message
+- Browser tab icon using the shop logo
+- Semantic HTML, CSS Grid, Flexbox, hover effects, and smooth transitions
 
-## Add product photos
+## Products and images
 
-The product cards currently have labeled photo placeholders. Add your image files to `images/`, then replace a placeholder in `index.html` with an image, for example:
+The menu includes Afghan Roghani Naan, butter croissant, blueberry muffin, chocolate cake, cinnamon roll, vanilla cake, Bakhlawa (Bghlawa), and Sheerpera. Product photos and the shop logo are stored in `images/` and linked from `index.html`.
 
-```html
-<img src="images/bakhlawa.jpg" alt="Afghan bakhlawa filled with nuts">
-```
+## Contact form note
 
-Use a short, clear description in each image's `alt` text.
+The form checks the submitted fields and shows a confirmation message in the browser. It does not send messages to a server.
