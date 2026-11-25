@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
         navBackdrop.hidden = !isOpen;
         navBackdrop.classList.toggle('active', isOpen);
+        if (isOpen) document.querySelector('.site-header').classList.remove('nav-hidden');
     });
 
     closeNavButton.addEventListener('click', closeMobileNav);
@@ -37,6 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeMobileNav();
+    });
+
+    // Close the mobile drawer if the screen is resized to desktop width
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 900) closeMobileNav();
     });
 
 
@@ -180,6 +186,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
+
+        // Keep the header visible on mobile and while the menu is open
+        if (window.innerWidth <= 900 || document.querySelector('.nav-links.active')) {
+            header.classList.remove('nav-hidden');
+            lastScrollY = currentScrollY;
+            return;
+        }
 
         // If scrolling down AND we've scrolled past the hero section
         if (currentScrollY > lastScrollY && currentScrollY > 100) {
